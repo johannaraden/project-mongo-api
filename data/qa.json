@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "text": "I read that Lorem ipsum dolor sit amet, consectetur adipiscing elit? What are your thought on this topic?",
+    "createdAt": "",
+    "answers": [ {
+      "id": 1,
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      },
+      {
+        "id": 2,
+        "text": "I do not agree at all! Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }]
+  },
+  {
+    "id": 2,
+    "text": "Where can I buy the cheapest XX?",
+    "createdAt": "",
+    "answers": [ {
+      "id": 1,
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      },
+      {
+        "id": 2,
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }]
+  },
+  {
+    "id": 3,
+    "text": "Does anyone know the song playing the commercial for XX?",
+    "createdAt": "",
+    "answers": [
+      {
+        "id": 1,
+        "text": "I looked that up too. It's XX by YY"
+        },
+        {
+          "id": 2,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "I think my neighbor is stealing my wi-fi? What to do?",
+    "createdAt": "",
+    "answers": [
+      {
+      "id": 1,
+      "text": "You sound a bit paranoid. Change the password and see if it gets hacked again."
+      },
+      {
+        "id": 2,
+        "text": "Annoying! Try to do Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+    ]
+  }
+]
