@@ -11,29 +11,31 @@ mongoose.Promise = Promise
 
 
 const Question = mongoose.model('Question', {
-  id: {
-    type: Number
-  },
-  text: {
-    type: String
-  },
-  likes: {
-    type: Number
-  },
-  answers: {
-    id: Number,
-    text: String
-  }
+  id: Number,
+  question: String,
+  likes: Number
 })
 
 
-if (process.env.RESET_DATABASE) {
-  console.log('Resetting database..')
+// if (process.env.RESET_DATABASE) {
+//   console.log('Resetting database..')
 
+//   const seedDatabase = async () => {
+//     await Question.deleteMany()
+//     //  Save the questions in qa.json to the database
+//     await data.forEach((question) => new Question(question).save());
+//     console.log('saving questions')
+//   }
+//   seedDatabase()
+// // }
+
+if (process.env.RESET_DB) {
+  console.log('Resetting Database!')
   const seedDatabase = async () => {
-    await Question.deleteMany()
-    //  Save the questions in qa.json to the database
-    await data.forEach((question) => new Question(question).save());
+    await Question.deleteMany({})
+    data.forEach((question) => {
+      new Question(question).save()
+    })
   }
   seedDatabase()
 }
@@ -64,7 +66,7 @@ app.get('/', (req, res) => {
 app.get('/questions', async (req, res) => {
   const { query } = req.query
   const queryRegex = new RegExp(query, 'i')
-  const questions = await Question.find({text: queryRegex}).populate('User')
+  const questions = await Question.find({text: queryRegex})
   console.log(`Found ${questions.length} question(s)`)
   res.json(questions)
 })
@@ -84,14 +86,11 @@ app.get('/questions/:id', async (req, res) => {
   }
 })
 
-// app.get('/popular', (req, res) => {
-//   res.json(Question)
-//     if(question) {
-//       res.json(question).populate('User')
-//     } else {
-//       res.status(404).json({error: 'Sorry there is no question'})
-//     }
-//   })
+// Top three page shows the three questions with the most likes 
+app.get('/popular', async(req, res) => {
+  const questions = await Question.sort({likes: 1}).slice(0, 2)
+  res.send(questions)
+  })
 
 // Start the server
 app.listen(port, () => {
