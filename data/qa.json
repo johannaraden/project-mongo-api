@@ -2,20 +2,21 @@
   {
     "id": 1,
     "text": "I read that Lorem ipsum dolor sit amet, consectetur adipiscing elit? What are your thought on this topic?",
-    "createdAt": "",
-    "answers": [ {
+    "likes": 54,
+    "answers": [{
       "id": 1,
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       },
       {
         "id": 2,
         "text": "I do not agree at all! Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        }]
+        }
+    ]
   },
   {
     "id": 2,
     "text": "Where can I buy the cheapest XX?",
-    "createdAt": "",
+    "likes": 4,
     "answers": [ {
       "id": 1,
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -27,8 +28,8 @@
   },
   {
     "id": 3,
-    "text": "Does anyone know the song playing the commercial for XX?",
-    "createdAt": "",
+    "text": "Does anyone know the song playing in the commercial for XX?",
+    "likes": 24,
     "answers": [
       {
         "id": 1,
@@ -43,7 +44,7 @@
   {
     "id": 4,
     "text": "I think my neighbor is stealing my wi-fi? What to do?",
-    "createdAt": "",
+    "likes": 78,
     "answers": [
       {
       "id": 1,
