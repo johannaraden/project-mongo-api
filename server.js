@@ -11,15 +11,7 @@ mongoose.Promise = Promise
 // Reusable variable for error messages
 const ERR_NO_QUESTIONS = 'Sorry, could not find this question.'
 
-const User = mongoose.model('User', {
-  id: {
-    type: Number
-  },
-  userType: {
-    type: String
-  }
-})
-
+// Question Model
 const Question = mongoose.model('Question', {
   id: {
     type: Number
@@ -30,9 +22,14 @@ const Question = mongoose.model('Question', {
   likes: {
     type: Number
   },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
  
+//Seeding database
 
 if (process.env.RESET_DB) {
   console.log('Resetting Database!')
@@ -42,19 +39,6 @@ if (process.env.RESET_DB) {
     data.forEach((question) => {
       new Question(question).save()
     })
-    const rookie = await new User({
-      id: 1,
-      userType: 'Rookie'
-    }).save()
-    const experienced = await new User({
-      id: 2,
-      userType: 'Experienced'
-    }).save()
-    const knowItAll = await new User({
-      id: 3,
-      userType: 'Know-it-all'
-    }).save()
-    // const userArray = [knowItAll, experienced, rookie]
   }
   seedDatabase()
 }
@@ -87,19 +71,7 @@ app.get('/', (req, res) => {
 app.get('/questions', async (req, res) => {
   const { query } = req.query
   const queryRegex = new RegExp(query, 'i')
-  // await User.count().exec((err, count) => {
-  //   let random = Math.floor(Math.random() * count)
-  //     User.findOne().skip(random).exec((err, result) => {
-  //       console.log(result) 
-  //     })
-  // })
-  const questions = await Question.find({question: queryRegex}).populate({
-    path: 'path',
-    options: {limit: myLimit}
-})
-  let myLimit = await Math.floor(Math.random() * (questions.length - 1) + 1)
-
-  console.log(myLimit)
+  const questions = await Question.find({question: queryRegex})
   console.log(`Found ${questions.length} question(s)`)
   res.json(questions)
 })
@@ -128,12 +100,6 @@ app.get('/popular', async(req, res) => {
   app.get('/nolikes', async(req, res) => {
     const noLikesQuestions = await Question.find({likes: 0})
     res.json(noLikesQuestions)
-  })
-
-  app.post('/question', async (req,res) => {
-    const question = new Question(req.body)
-    await question.save()
-    res.json(question)
   })
 
 // Start the server
