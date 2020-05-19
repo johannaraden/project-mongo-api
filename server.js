@@ -30,6 +30,10 @@ const Question = mongoose.model('Question', {
   likes: {
     type: Number
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
  
@@ -87,19 +91,15 @@ app.get('/', (req, res) => {
 app.get('/questions', async (req, res) => {
   const { query } = req.query
   const queryRegex = new RegExp(query, 'i')
-  // await User.count().exec((err, count) => {
-  //   let random = Math.floor(Math.random() * count)
-  //     User.findOne().skip(random).exec((err, result) => {
-  //       console.log(result) 
-  //     })
-  // })
-  const questions = await Question.find({question: queryRegex}).populate({
-    path: 'path',
-    options: {limit: myLimit}
-})
-  let myLimit = await Math.floor(Math.random() * (questions.length - 1) + 1)
+  await User.countDocuments().exec((err, count) => {
+    let random = Math.floor(Math.random() * count)
+      User.findOne().skip(random).exec((err, result) => {
+        console.log(result) 
+      })
+  })
 
-  console.log(myLimit)
+  const questions = await Question.find({question: queryRegex})
+  await questions.forEach((question) => question.populate(result))
   console.log(`Found ${questions.length} question(s)`)
   res.json(questions)
 })
