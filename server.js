@@ -25,8 +25,7 @@ const Question = mongoose.model('Question', {
   createdAt: {
     type: Date,
     default: Date.now()
-  },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  }
 })
  
 //Seeding database
@@ -35,7 +34,6 @@ if (process.env.RESET_DB) {
   console.log('Resetting Database!')
   const seedDatabase = async () => {
     await Question.deleteMany({})
-    await User.deleteMany({})
     data.forEach((question) => {
       new Question(question).save()
     })
