@@ -30,7 +30,7 @@ const Question = mongoose.model('Question', {
  
 //Seeding database
 
-if (process.env.RESET_DB) {
+// if (process.env.RESET_DB) {
   console.log('Resetting Database!')
   const seedDatabase = async () => {
     await Question.deleteMany({})
@@ -39,7 +39,7 @@ if (process.env.RESET_DB) {
     })
   }
   seedDatabase()
-}
+// }
 
 
 
