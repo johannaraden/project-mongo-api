@@ -77,17 +77,14 @@ app.get('/questions', async (req, res) => {
 //Looking for a specific question by id.
 
 app.get('/questions/:id', async (req, res) => {
-  try {
     const question = await Question.findById(req.params.id) 
     if (question) {
       res.json(question)
     } else {
       res.status(404).json({error: ERR_NO_QUESTIONS})
   } 
-  }catch (err) {
-    res.status(400).json({error: ERR_NO_QUESTIONS})
   }
-})
+)
 
 // Top three page shows the three questions with the most likes 
 app.get('/popular', async(req, res) => {
